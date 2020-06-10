@@ -44,6 +44,8 @@ static const Layout layouts[] = {
 	{ "[M]",      monocle },
 };
 
+#include <X11/XF86keysym.h>
+
 /* key definitions */
 #define MODKEY Mod4Mask
 #define TAGKEYS(KEY,TAG) \
@@ -95,6 +97,13 @@ static Key keys[] = {
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
 	{ ControlMask|Mod1Mask,         XK_BackSpace, quit,        {0} },
+
+	{ 0, XF86XK_MonBrightnessUp,	spawn,		SHCMD("xbacklight -inc 10") },
+	{ 0, XF86XK_MonBrightnessDown,	spawn,		SHCMD("xbacklight -dec 10") },
+    { 0, XF86XK_AudioMute,		    spawn,		SHCMD("pactl set-sink-mute 0 toggle") },
+	{ 0, XF86XK_AudioRaiseVolume,	spawn,		SHCMD("pactl set-sink-mute 0 false ; pactl set-sink-volume 0 +10%") },
+	{ 0, XF86XK_AudioLowerVolume,	spawn,		SHCMD("pactl set-sink-mute 0 false ; pactl set-sink-volume 0 -10%") },
+	{ 0, XF86XK_Calculator, 	    spawn,		SHCMD("st -e R") },
 };
 
 /* button definitions */
