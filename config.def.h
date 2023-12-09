@@ -2,17 +2,18 @@
 
 /* appearance */
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
+static const unsigned int gappx     = 5;        /* gaps between windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const int user_bh            = 24;        /* 0 means that dwm will calculate bar height, >= 1 means dwm will user_bh as bar height */
-static const char *fonts[]          = { "monospace:size=10" };
-static const char dmenufont[]       = "monospace:size=10";
+static const int user_bh            = 28;        /* 0 means that dwm will calculate bar height, >= 1 means dwm will user_bh as bar height */
+static const char *fonts[]          = { "Cantarell:size=12" };
+static const char dmenufont[]       = "Cantarell:size=12";
 static const char col_gray1[]       = "#000000";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
 static const char col_gray4[]       = "#eeeeee";
-static const char col_cyan[]        = "#47637e";
+static const char col_cyan[]        = "#a89984" // "#47637e";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
@@ -58,14 +59,20 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, "-l", "10", NULL };
 static const char *termcmd[]  = { "st", NULL };
-static const char *increasevolumecmd[]  = { "pamixer", "--increase", "1" };
-static const char *decreasevolumecmd[]  = { "pamixer", "--decrease", "1" };
+static const char *calccmd[]  = { "st", "python", NULL };
+static const char *increasevolumecmd[]  = { "pamixer", "--increase", "1", NULL };
+static const char *decreasevolumecmd[]  = { "pamixer", "--decrease", "1", NULL };
+static const char *mutevolumecmd[] = { "pamixer", "-t", NULL };
+static const char *medplaypausecmd[] = { "playerctl", "play-pause", NULL };
+static const char *mednextcmd[] = { "playerctl", "next", NULL };
+static const char *medprevcmd[] = { "playerctl", "previous", NULL };
 
 static const Key keys[] = {
 	/* modifier                     key             function        argument */
 	{ MODKEY,                       XK_p,                       spawn,          {.v = dmenucmd } },
+    { 0,                            XF86XK_Search,              spawn,          {.v = dmenucmd } },
 	{ MODKEY|ShiftMask,             XK_Return,                  spawn,          {.v = termcmd } },
 	{ MODKEY|ControlMask,           XK_t,                       spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_b,                       togglebar,      {0} },
@@ -100,8 +107,15 @@ static const Key keys[] = {
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
 	{ MODKEY|ControlMask,           XK_Delete,                  quit,           {0} },
-    { 0,                            XF86XK_AudioLowerVolume,    spawn,          {.v = decreasevolumecmd }},
-    { 0,                            XF86XK_AudioRaiseVolume,    spawn,          {.v = increasevolumecmd }},
+    { 0,                            XF86XK_Calculator,          spawn,          {.v = calccmd } },
+    /* Audio bindings */
+    { 0,                            XF86XK_AudioLowerVolume,    spawn,          {.v = decreasevolumecmd } },
+    { 0,                            XF86XK_AudioRaiseVolume,    spawn,          {.v = increasevolumecmd } },
+    { 0,                            XF86XK_AudioMute,           spawn,          {.v = mutevolumecmd } },
+    { 0,                            XF86XK_AudioPlay,           spawn,          {.v = medplaypausecmd } },
+    { 0,                            XF86XK_AudioStop,           spawn,          {.v = medplaypausecmd } },
+    { 0,                            XF86XK_AudioPrev,           spawn,          {.v = mednextcmd } },
+    { 0,                            XF86XK_AudioNext,           spawn,          {.v = medprevcmd } },
 };
 
 /* button definitions */
