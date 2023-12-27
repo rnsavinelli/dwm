@@ -13,7 +13,7 @@ static const char col_gray1[]       = "#000000";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
 static const char col_gray4[]       = "#eeeeee";
-static const char col_cyan[]        = "#a89984" // "#47637e";
+static const char col_cyan[]        = "#444444"; // "#47637e";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
@@ -59,7 +59,7 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, "-l", "10", NULL };
+static const char *dmenucmd[] = { "dmenu_run_history", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, "-l", "10", NULL };
 static const char *termcmd[]  = { "st", NULL };
 static const char *calccmd[]  = { "st", "python", NULL };
 static const char *increasevolumecmd[]  = { "pamixer", "--increase", "1", NULL };
@@ -68,6 +68,7 @@ static const char *mutevolumecmd[] = { "pamixer", "-t", NULL };
 static const char *medplaypausecmd[] = { "playerctl", "play-pause", NULL };
 static const char *mednextcmd[] = { "playerctl", "next", NULL };
 static const char *medprevcmd[] = { "playerctl", "previous", NULL };
+static const char *screenshotcmd[] = { "screenshot", "NULL" };
 
 static const Key keys[] = {
 	/* modifier                     key             function        argument */
@@ -108,6 +109,7 @@ static const Key keys[] = {
 	TAGKEYS(                        XK_9,                      8)
 	{ MODKEY|ControlMask,           XK_Delete,                  quit,           {0} },
     { 0,                            XF86XK_Calculator,          spawn,          {.v = calccmd } },
+    { 0,                            XK_Print,                   spawn,          {.v = screenshotcmd } },
     /* Audio bindings */
     { 0,                            XF86XK_AudioLowerVolume,    spawn,          {.v = decreasevolumecmd } },
     { 0,                            XF86XK_AudioRaiseVolume,    spawn,          {.v = increasevolumecmd } },
