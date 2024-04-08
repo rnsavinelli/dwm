@@ -28,12 +28,12 @@ static const Rule rules[] = {
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-	/* class        instance    title       tags mask     isfloating   monitor */
-	{ "Gimp",       NULL,       NULL,       0,            1,           -1 },
-	{ "Caja",       NULL,       NULL,       0,            1,           -1 },
-	{ "zoom",       NULL,       NULL,       1 << 6,       0,           -1 },
-	{ "discord",    NULL,       NULL,       1 << 7,       0,           -1 },
-	{ "Slack",      NULL,       NULL,       1 << 8,       0,           -1 },
+	/* class        instance    title       tags mask       isfloating      monitor */
+	{ "Gimp",       NULL,       NULL,       0,              1,              -1 },
+	{ "Caja",       NULL,       NULL,       0,              1,              -1 },
+	{ "Slack",      NULL,       NULL,       1 << 8,         0,              -1 },
+	{ "Spotify",    NULL,       NULL,       1 << 7,         0,              -1 },
+	{ "zoom",       NULL,       NULL,       1 << 6,         0,              -1 },
 };
 
 /* layout(s) */
@@ -63,7 +63,7 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run_history", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, "-l", "10", NULL };
+static const char *dmenucmd[] = { "dmenu_run_history", "-l", "10", NULL };
 static const char *termcmd[]  = { "st", NULL };
 static const char *calccmd[]  = { "st", "python", NULL };
 static const char *increasevolumecmd[]  = { "pamixer", "--increase", "2", NULL };
@@ -72,7 +72,7 @@ static const char *mutevolumecmd[] = { "pamixer", "-t", NULL };
 static const char *medplaypausecmd[] = { "playerctl", "play-pause", NULL };
 static const char *mednextcmd[] = { "playerctl", "next", NULL };
 static const char *medprevcmd[] = { "playerctl", "previous", NULL };
-static const char *screenshotcmd[] = { "screenshot", "NULL" };
+static const char *screenshotcmd[] = { "screenshot", NULL };
 
 static const Key keys[] = {
 	/* modifier                     key             function        argument */
