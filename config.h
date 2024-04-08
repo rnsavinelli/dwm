@@ -31,9 +31,9 @@ static const Rule rules[] = {
 	/* class        instance    title       tags mask       isfloating      monitor */
 	{ "Gimp",       NULL,       NULL,       0,              1,              -1 },
 	{ "Caja",       NULL,       NULL,       0,              1,              -1 },
-	{ "zoom",       NULL,       NULL,       1 << 6,         0,              -1 },
-    { "Spotify",    "spotify",  NULL,       1 << 7,         0,              -1 },
 	{ "Slack",      NULL,       NULL,       1 << 8,         0,              -1 },
+	{ "Spotify",    NULL,       NULL,       1 << 7,         0,              -1 },
+	{ "zoom",       NULL,       NULL,       1 << 6,         0,              -1 },
 };
 
 /* layout(s) */
@@ -72,7 +72,7 @@ static const char *mutevolumecmd[] = { "pamixer", "-t", NULL };
 static const char *medplaypausecmd[] = { "playerctl", "play-pause", NULL };
 static const char *mednextcmd[] = { "playerctl", "next", NULL };
 static const char *medprevcmd[] = { "playerctl", "previous", NULL };
-static const char *screenshotcmd[] = { "screenshot", "NULL" };
+static const char *screenshotcmd[] = { "screenshot", NULL };
 
 static const Key keys[] = {
 	/* modifier                     key             function        argument */
